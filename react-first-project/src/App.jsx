@@ -1,8 +1,10 @@
-import List from "./List.jsx";
+import Button from './Button.jsx';
+import Profile from './Profile.jsx';
 function App() {
   return (
     <>
-      <List></List>
+      <Button></Button> 
+      <Profile></Profile>
     </>
   );
 }
