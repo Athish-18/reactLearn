@@ -1,10 +1,8 @@
-import Button from './Button.jsx';
-import Profile from './Profile.jsx';
+import MyComponent from "./MyComponent.jsx";
 function App() {
   return (
     <>
-      <Button></Button> 
-      <Profile></Profile>
+      <MyComponent/>
     </>
   );
 }
