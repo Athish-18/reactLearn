@@ -1,8 +1,8 @@
-import User from "./User.jsx";
+import List from "./List.jsx";
 function App() {
   return (
     <>
-      <User isUser={true} name="Athish"></User>
+      <List></List>
     </>
   );
 }
