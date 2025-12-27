@@ -1,41 +1,51 @@
 import React, { useState } from "react";
-
 function MyComponent() {
-  // State to store list of foods
-  const [foods, setFoods] = useState(["Pizza", "Burger", "Hotdog"]);
+  const [cars, setCar] = useState([]);
+  const [carYear, setYear] = useState(new Date().getFullYear());
+  const [carMake, setMake] = useState("");
+  const [carModel, setModel] = useState("");
 
-  // Function to add a new food item
-  const handleAddFood = () => {
-    // Get input value
-    const foodItem = document.getElementById("fav").value;
+  function addCar() {
+    const newCar = { year: carYear, make: carMake, model: carModel };
+    setCar((c) => [...c, newCar]);
 
-   
+    setYear(new Date().getFullYear());
+    setMake("");
+    setModel("");
+  }
 
-    // Update state using updater function
-    setFoods((f) => [...f, foodItem]);
+  function addYear(event) {
+    setYear(event.target.value);
+  }
 
-    // Clear input field after adding
-    document.getElementById("fav").value = "";
-  };
+  function addMake(event) {
+    setMake(event.target.value);
+  }
+
+  function addModel(event) {
+    setModel(event.target.value);
+  }
+
+  function handleRemove(index) {
+    setCar((c) => c.filter((_, i) => i !== index)); // if i click on list item at index i, remove that item
+  }
 
   return (
     <>
-      <h1>My Fav Foods</h1>
-
+      <h1>List of Car objects</h1>
       <ul>
-        {/* map() must RETURN JSX */}
-        {foods.map((food, index) => (
-          <li key={index}>{food}</li>
+        {cars.map((car, index) => (
+          <li key={index} onCClick={() => handleRemove(index)}>
+            {" "}
+            {car.year} {car.make} {car.model}
+          </li>
         ))}
       </ul>
-
-      {/* Input field */}
-      <input type="text" id="fav" placeholder="Type favorite food" />
-
-      {/* Button to add food */}
-      <button onClick={handleAddFood}>Add food</button>
+      <input type="number" placeholder="2025" onChange={addYear}></input>
+      <input type="text" placeholder="Renault" onChange={addMake}></input>
+      <input type="text" placeholder="Hatchback" onChange={addModel}></input>
+      <button onClick={addCar}> Add Car</button>
     </>
   );
 }
-
 export default MyComponent;
