@@ -1,8 +1,8 @@
-import MyComponent from './MyComponent.jsx';
+import ToDoList from './ToDoList.jsx';
 function App() {
   return (
     <>
-    <MyComponent/>
+    <ToDoList/>
     </>
   );
 }
