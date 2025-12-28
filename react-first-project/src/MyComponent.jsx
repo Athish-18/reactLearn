@@ -18,31 +18,41 @@
 
 import { useState, useEffect } from "react";
 function MyComponent() {
-  //Use Effect example 1: Run on every re-render
-  // useEffect(() => {
-  //   document.title = `You clicked ${count} times`; //updates the title of the document every time the component re-renders ie count changes
+  const [width, setWidth] = useState(window.innerWidth);
+  const [height, setHeight] = useState(window.innerHeight);
 
-    //useEffect(() => {}, [])       // Runs only on mount --- Update document title only when component mounts ie only once at the start
-    // useEffect(()=>{
-    //   document.title=`Count is ${count}`;
-    // },[]);
-    
+  // window.addEventListener("resize",handleResize);
+  // console.log("event listener added"); many event listeners added to create only 1 -- event listeners use Useffect
 
-    // useEffect(()=>{
-    //   document.title=`Count is${count} times`;
-    // },[count]);        // Changes title only when count is updated and is mounted ie basically everytime count changes.
+  // useEffect(()=>{
+  //   window.addEventListener("resize", handleResize);
+  //   console.log("event listener added");
 
+  // },[]) /// now only once event listener created ie at the time of mount (creation of component)
 
-  const [count, setCount] = useState(0);
-  setCount((c) => c + 1);
-  const addCount = () => {
-    setCount(count + 1);
-  };
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    console.log("event listener added");
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      console.log("Event Listener Removed"); /// to perform some cleanup
+    };
+  }, []);
+
+  useEffect(() => {
+    document.title = `Size:${width} ${height}`;
+  });
+
+  function handleResize() {
+    setHeight(window.innerHeight);
+    setWidth(window.innerWidth);
+  }
 
   return (
     <>
-      <h1>Count:{count}</h1>
-      <button onClick={addCount}>Increase Count</button>
+      <p>Window Width : {width}px</p>
+      <p>Window Height : {height}px</p>
     </>
   );
 }
