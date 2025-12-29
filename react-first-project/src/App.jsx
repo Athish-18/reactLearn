@@ -1,9 +1,8 @@
-import MyComponent from './MyComponent.jsx';
+import Stopwatch from './Stopwatch.jsx';
 function App() {
   return (
     <>
-    
-<MyComponent></MyComponent>
+    <Stopwatch></Stopwatch>
     </>
   );
 }
